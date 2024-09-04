@@ -25,7 +25,7 @@ modules:
     buildsystem: simple
     build-commands:
       # - mkdir -p deckr
-      # - tar -xf Deckr-Linux-Portable.tar.gz -C deckr
+      # - tar -xf Deckr-Linux.tar.gz -C deckr
       - mv deckr /app/deckr
 
       - chmod +x /app/deckr/deckr
@@ -43,15 +43,15 @@ modules:
       - install -Dm644 surf.deckr.deckr.desktop -t /app/share/applications/
     sources:
       - type: archive
-        url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Linux-Portable.tar.gz
+        url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Linux.tar.gz
         # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Debug.tar.gz
-        sha256: 1c2b41d76ee068a3b0fc3699f347c52ce210efd91ba560ae9248e9aee70fd684
+        sha256: ea5dc2e9d6cf645cef4dd9ae3775d5d197321ae9e9ca972bdf0134a61280b652
         dest: deckr
 
       - type: archive
-        url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/gpt-libs.tar.gz
-        # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/gpt-debug-libs.tar.gz
-        sha256: 1f6ea1308fb459e6f95ba043e32cc01694c0f24882305fb18098e2f276e1c69d
+        url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/deckr-gpt-libs.tar.gz
+        # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/deckr-gpt-debug-libs.tar.gz
+        sha256: c3e3403b2dc51cd30e87a726bac6287fc6c72ef92d86be10ea5e2e3ded3f346c
         dest: gpt
 
       - type: file
@@ -69,7 +69,7 @@ modules:
       - type: file
         path: icons/app_icon_512.png
       # - type: file
-      #   path: Deckr-Linux-Portable.tar.gz
+      #   path: Deckr-Linux.tar.gz
 
   - shared-modules/intltool/intltool-0.51.json
 

@@ -16,12 +16,25 @@ https://www.freedesktop.org/software/appstream/metainfocreator/#/
     <control>keyboard</control>
   </supports>
   <description>
-    <p>Desktop app used with the Deckr chrome plugin. Deckr is a bookmark manager which allows you to share and download bookmark "decks" with others online.</p>
+    <p>Deckr enhances your web browser by adding useful features to the browsers "New Tab" page. It works on the Chrome, Firefox and Safari web browsers.</p>
+    <p>Install this application and also install the Deckr browser extension found on the browser's extension store.</p>
+    <p>Deckr has a ton of useful features designed to make browsing the web fun again. There are currently 3 main tabs in the user interface.</p>
+    <ul>
+      <li>The Home tab lets you launch mini-apps for example: an AI Chatbot, an Image Editor, an Internet radio player and much more</li>
+      <li>The Bookmarks tab lets you create bookmark 'Decks' and share them with others online</li>
+      <li>The RSS reader tab lets you quickly find news stories from RSS feeds around the world</li>
+    </ul>
     <p>Features</p>
     <ul>
-      <li>Replaces "New Tab" in chrome with a bookmark deck manager</li>
-      <li>Share and download bookmark decks online</li>
-      <li>Lots more features. Install it and give it a try.</li>
+      <li>Replaces the browsers "New Tab" page with the Deckr application user interface</li>
+      <li>Create, share and download bookmark decks online</li>
+      <li>Tons of build in links to popular sites</li>
+      <li>Convienient mini-apps built in</li>
+      <li>Powerful search features</li>
+      <li>Better tab management</li>
+      <li>Easy access to the native browser's bookmarks</li>
+      <li>Data stored locally in the desktop application. The application acts as a private cloud and it runs silently in the background.</li>
+      <li>Lots more features and more added every month. Install it and give it a try.</li>
     </ul>
   </description>
   <provides>
@@ -33,8 +46,16 @@ https://www.freedesktop.org/software/appstream/metainfocreator/#/
   <launchable type="desktop-id">surf.deckr.deckr.desktop</launchable>
   <screenshots>
     <screenshot type="default">
-      <image>https://d3sp89svrxzy0t.cloudfront.net/dashboard/screenshot.png</image>
-      <caption>Screenshot</caption>
+      <image>https://d3sp89svrxzy0t.cloudfront.net/dashboard/screenshot-home.png</image>
+      <caption>Home Tab</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://d3sp89svrxzy0t.cloudfront.net/dashboard/screenshot-bookmarks.png</image>
+      <caption>Bookmarks Tab</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://d3sp89svrxzy0t.cloudfront.net/dashboard/screenshot-rss.png</image>
+      <caption>RSS Reader Tab</caption>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1"/>
@@ -43,6 +64,6 @@ https://www.freedesktop.org/software/appstream/metainfocreator/#/
     <color type="primary" scheme_preference="dark">#394C5C</color>
   </branding>
   <releases>
-    <release version="2.5.96" date="2024-08-19"/>
+    <release version="2.6.11" date="2024-09-03"/>
   </releases>
 </component>
