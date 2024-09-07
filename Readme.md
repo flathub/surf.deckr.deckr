@@ -8,3 +8,4 @@ For more information: [deckr.surf](https://deckr.surf)
 
 git submodule init
 git submodule update
+git submodule update --init --recursive
