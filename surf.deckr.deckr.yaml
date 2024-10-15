@@ -45,13 +45,13 @@ modules:
       - type: archive
         url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Linux.tar.gz
         # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Debug.tar.gz
-        sha256: a0f7bfa5808471a45d726b38a9d9c09026dd39f5104b6dfc1af22087ac0c746f
+        sha256: ff112209a131bc428d8c9223f1be582c84992eb5a91498343489a6093a99f410
         dest: deckr
 
       - type: archive
         url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/deckr-gpt-libs.tar.gz
         # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/deckr-gpt-debug-libs.tar.gz
-        sha256: 96bb21c778ad0bbfe10459c8ac2ff03f1ac7cc04a4858e913d624674ced1ca20
+        sha256: c61b2519e01acd2b7545e6e3c48835bc3639615ca5b3b22c5bbbefe3d33f1cfc
         dest: gpt
 
       - type: file
