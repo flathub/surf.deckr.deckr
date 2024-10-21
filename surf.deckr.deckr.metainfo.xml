@@ -64,6 +64,6 @@ https://www.freedesktop.org/software/appstream/metainfocreator/#/
     <color type="primary" scheme_preference="dark">#394C5C</color>
   </branding>
   <releases>
-    <release version="2.6.53" date="2024-10-15"/>
+    <release version="2.6.58" date="2024-10-21"/>
   </releases>
 </component>
