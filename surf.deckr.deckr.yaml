@@ -21,7 +21,6 @@ finish-args:
   - --filesystem=xdg-videos
   # Allow access to hardware video acceleration
   - --filesystem=/sys/class/drm:ro
-  - --filesystem=/dev/dri:rw
 
 modules:
   - name: deckr
@@ -211,8 +210,6 @@ modules:
         sources:
           - type: git
             url: https://github.com/FFmpeg/FFmpeg.git
-            mirror-urls:
-              - https://git.ffmpeg.org/ffmpeg.git
             commit: db69d06eeeab4f46da15030a80d539efb4503ca8
             tag: n7.1.1
             x-checker-data:
