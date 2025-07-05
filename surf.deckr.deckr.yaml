@@ -19,6 +19,9 @@ finish-args:
   - --filesystem=xdg-music
   - --filesystem=xdg-pictures
   - --filesystem=xdg-videos
+  # Allow access to hardware video acceleration
+  - --filesystem=/sys/class/drm:ro
+  - --filesystem=/dev/dri:rw
 
 modules:
   - name: deckr
@@ -45,13 +48,13 @@ modules:
       - type: archive
         url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Linux.tar.gz
         # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Debug.tar.gz
-        sha256: b9d4fbe87aa1b24318a1e4643e683ab0946bebdb0381e68f920361c614a4644e
+        sha256: 33cce1742a9ad5286f31a30bfb667c1a3eb1bff7df69a12ed1ee07bb78a41746
         dest: deckr
 
       - type: archive
         url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/deckr-gpt-libs.tar.gz
         # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/deckr-gpt-debug-libs.tar.gz
-        sha256: b1bbca8e8e69ac56afd757f90fffed461fd3cdc1bb7be9bf5b169d3bb3443e3c
+        sha256: f938f8f30e07ec6236210315de5fa9117262b44855e4622ec6f4858f97ce7977
         dest: gpt
 
       - type: file
@@ -80,14 +83,14 @@ modules:
     sources:
       - type: git
         url: https://github.com/AyatanaIndicators/ayatana-ido.git
-        tag: 0.9.2
+        tag: 0.10.4
 
   - name: libayatana-indicator
     buildsystem: cmake-ninja
     sources:
       - type: git
         url: https://github.com/AyatanaIndicators/libayatana-indicator.git
-        tag: 0.9.3
+        tag: 0.9.4
 
   - name: libdbusmenu-gtk3
     buildsystem: autotools
@@ -97,7 +100,6 @@ modules:
       - --with-gtk=3
       - --disable-dumper
       - --disable-static
-      - --enable-tests
       - --disable-gtk-doc
       - --enable-introspection=no
       - --disable-vala
@@ -113,10 +115,11 @@ modules:
     config-opts:
       - -DENABLE_BINDINGS_MONO=NO
       - -DENABLE_BINDINGS_VALA=NO
+      - -DENABLE_GTKDOC=OFF
     sources:
       - type: git
         url: https://github.com/AyatanaIndicators/libayatana-appindicator.git
-        tag: 0.5.91
+        tag: 0.5.94
 
   # These are the required for media_kit
   - name: libmpv
@@ -134,8 +137,8 @@ modules:
       - -Dgpl=false
     sources:
       - type: archive
-        url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.38.0.tar.gz
-        sha256: 86d9ef40b6058732f67b46d0bbda24a074fae860b3eaae05bab3145041303066
+        url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.40.0.tar.gz
+        sha256: 10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3
         x-checker-data:
           type: anitya
           project-id: 5348
@@ -150,8 +153,8 @@ modules:
           - --disable-static
         sources:
           - type: archive
-            url: https://github.com/libass/libass/releases/download/0.17.2/libass-0.17.2.tar.gz
-            sha256: a9afb52bf76a2569263fe2038896774c991b35c0968342a03be708e56ea60c3b
+            url: https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.gz
+            sha256: a886b3b80867f437bc55cff3280a652bfa0d37b43d2aff39ddf3c4f288b8c5a8
             x-checker-data:
               type: anitya
               project-id: 1560
@@ -166,8 +169,8 @@ modules:
           - PREFIX=/app
         sources:
           - type: archive
-            url: https://github.com/FFmpeg/nv-codec-headers/archive/refs/tags/n12.2.72.0.tar.gz
-            sha256: dbeaec433d93b850714760282f1d0992b1254fc3b5a6cb7d76fc1340a1e47563
+            url: https://github.com/FFmpeg/nv-codec-headers/archive/refs/tags/n13.0.19.0.tar.gz
+            sha256: 86d15d1a7c0ac73a0eafdfc57bebfeba7da8264595bf531cf4d8db1c22940116
             x-checker-data:
               type: anitya
               project-id: 223796
@@ -183,11 +186,8 @@ modules:
         sources:
           - type: git
             url: https://github.com/haasn/libplacebo.git
-            commit: 64c1954570f1cd57f8570a57e51fb0249b57bb90
-            tag: v6.338.2
-            x-checker-data:
-              type: git
-              tag-pattern: ^v([\d.]+)$
+            tag: v7.351.0
+            disable-shallow-clone: true
 
       - name: ffmpeg
         cleanup:
@@ -200,21 +200,21 @@ modules:
           - --enable-libmp3lame
           - --enable-libopus
           - --enable-libvorbis
-          - --enable-libmp3lame
-
           - --disable-static
           - --disable-debug
           - --disable-doc
           - --disable-programs
           - --disable-encoders
           - --disable-muxers
+          - --enable-protocol=https
+          - --enable-protocol=tls
         sources:
           - type: git
             url: https://github.com/FFmpeg/FFmpeg.git
             mirror-urls:
               - https://git.ffmpeg.org/ffmpeg.git
-            commit: af25a4bfd2503caf3ee485b27b99b620302f5718
-            tag: n7.0.1
+            commit: db69d06eeeab4f46da15030a80d539efb4503ca8
+            tag: n7.1.1
             x-checker-data:
               type: git
               tag-pattern: ^n([\d.]{3,7})$
