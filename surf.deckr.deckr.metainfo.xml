@@ -36,6 +36,16 @@ https://www.freedesktop.org/software/appstream/metainfocreator/#/
       <li>Data stored locally in the desktop application. The application acts as a private cloud and it runs silently in the background.</li>
       <li>Lots more features and more added every month. Install it and give it a try.</li>
     </ul>
+    <p>
+      Deckr is a background application that operates through the system tray. For
+      <em>GNOME desktop users</em>
+      (Ubuntu, Debian, Fedora), you need an AppIndicator extension to see the system tray icon:
+    </p>
+    <p>Install this extension if you don't see the system tray icon on the top right of the menubar</p>
+    <ul>
+      <li>gnome-extensions install ubuntu-appindicators@ubuntu.com</li>
+      <li>gnome-extensions enable ubuntu-appindicators@ubuntu.com</li>
+    </ul>
   </description>
   <provides>
     <id>com.cocoatech.deckr</id>
@@ -64,6 +74,6 @@ https://www.freedesktop.org/software/appstream/metainfocreator/#/
     <color type="primary" scheme_preference="dark">#394C5C</color>
   </branding>
   <releases>
-    <release version="2.8.67" date="2025-05-17"/>
+    <release version="2.9.15" date="2025-07-04"/>
   </releases>
 </component>
