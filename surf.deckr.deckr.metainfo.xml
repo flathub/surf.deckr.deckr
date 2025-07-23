@@ -47,12 +47,6 @@ https://www.freedesktop.org/software/appstream/metainfocreator/#/
       <li>gnome-extensions enable ubuntu-appindicators@ubuntu.com</li>
     </ul>
   </description>
-  <provides>
-    <id>com.cocoatech.deckr</id>
-  </provides>
-  <replaces>
-    <id>com.cocoatech.deckr</id>
-  </replaces>
   <launchable type="desktop-id">surf.deckr.deckr.desktop</launchable>
   <screenshots>
     <screenshot type="default">
@@ -74,6 +68,6 @@ https://www.freedesktop.org/software/appstream/metainfocreator/#/
     <color type="primary" scheme_preference="dark">#394C5C</color>
   </branding>
   <releases>
-    <release version="2.9.15" date="2025-07-04"/>
+    <release version="2.9.34" date="2025-07-23"/>
   </releases>
 </component>
