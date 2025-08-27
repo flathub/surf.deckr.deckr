@@ -13,6 +13,7 @@ appstreamcli validate --explain surf.deckr.deckr.metainfo.xml
 git submodule init
 git submodule update
 git submodule update --init --recursive
+git submodule update --remote --merge
 
 build-options:
 env:
