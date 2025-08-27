@@ -34,8 +34,6 @@ modules:
       - mkdir -p /app/bin
       - ln -s /app/deckr/deckr /app/bin/deckr
 
-      - mv gpt /app/gpt
-
       - install -Dm644 surf.deckr.deckr.metainfo.xml -t /app/share/metainfo/
       - install -Dm644 app_icon_32.png /app/share/icons/hicolor/32x32/apps/surf.deckr.deckr.png
       - install -Dm644 app_icon_64.png /app/share/icons/hicolor/64x64/apps/surf.deckr.deckr.png
@@ -47,14 +45,8 @@ modules:
       - type: archive
         url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Linux.tar.gz
         # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Debug.tar.gz
-        sha256: a56b62f4517b445d0ad712bbea1c97cc336c96ee433b0191af5a6fbc3f395288
+        sha256: b6ed6546d371a863eef33bb6dcfbb038ff53fcf8cc74946796238581c8cb2fd1
         dest: deckr
-
-      - type: archive
-        url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/deckr-gpt-libs.tar.gz
-        # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/deckr-gpt-debug-libs.tar.gz
-        sha256: 732651a84d19c7ff73c3bc3e1c6a50d934ffeae9921b3752ec24f860ea7ea43e
-        dest: gpt
 
       - type: file
         path: surf.deckr.deckr.metainfo.xml
@@ -74,51 +66,7 @@ modules:
       #   path: Deckr-Linux.tar.gz
 
   - shared-modules/intltool/intltool-0.51.json
-
-  # - shared-modules/libcanberra/libcanberra.json
-
-  - name: ayatana-ido
-    buildsystem: cmake-ninja
-    sources:
-      - type: git
-        url: https://github.com/AyatanaIndicators/ayatana-ido.git
-        tag: 0.10.4
-
-  - name: libayatana-indicator
-    buildsystem: cmake-ninja
-    sources:
-      - type: git
-        url: https://github.com/AyatanaIndicators/libayatana-indicator.git
-        tag: 0.9.4
-
-  - name: libdbusmenu-gtk3
-    buildsystem: autotools
-    build-options:
-      cflags: -Wno-error
-    config-opts:
-      - --with-gtk=3
-      - --disable-dumper
-      - --disable-static
-      - --disable-gtk-doc
-      - --enable-introspection=no
-      - --disable-vala
-    sources:
-      # https://launchpad.net/libdbusmenu/+milestone/16.04.0
-      # https://launchpad.net/libdbusmenu/16.04/16.04.0/+download/libdbusmenu-16.04.0.tar.gz
-      - type: archive
-        url: https://launchpad.net/libdbusmenu/16.04/16.04.0/+download/libdbusmenu-16.04.0.tar.gz
-        sha256: b9cc4a2acd74509435892823607d966d424bd9ad5d0b00938f27240a1bfa878a
-
-  - name: libayatana-appindicator
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DENABLE_BINDINGS_MONO=NO
-      - -DENABLE_BINDINGS_VALA=NO
-      - -DENABLE_GTKDOC=OFF
-    sources:
-      - type: git
-        url: https://github.com/AyatanaIndicators/libayatana-appindicator.git
-        tag: 0.5.94
+  - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
 
   # These are the required for media_kit
   - name: libmpv
@@ -179,14 +127,51 @@ modules:
       - name: libplacebo
         buildsystem: meson
         config-opts:
+          - -Dvulkan=enabled
+          - -Dshaderc=enabled
           - -Dglslang=disabled
           - -Dd3d11=disabled
           - -Ddemos=false
+
+        cleanup:
+          - /include
+          - /lib/pkgconfig
         sources:
           - type: git
             url: https://github.com/haasn/libplacebo.git
             tag: v7.351.0
-            disable-shallow-clone: true
+        modules:
+          - name: shaderc
+            buildsystem: cmake-ninja
+            builddir: true
+            config-opts:
+              - -DSHADERC_SKIP_COPYRIGHT_CHECK=ON
+              - -DSHADERC_SKIP_EXAMPLES=ON
+              - -DSHADERC_SKIP_TESTS=ON
+              - -DSPIRV_SKIP_EXECUTABLES=ON
+              - -DENABLE_GLSLANG_BINARIES=OFF
+            cleanup:
+              - /bin
+              - /include
+              - /lib/cmake
+              - "*.a"
+              - /lib/pkgconfig
+            sources:
+              - type: git
+                url: https://github.com/google/shaderc.git
+                tag: v2025.3
+              - type: git
+                url: https://github.com/KhronosGroup/SPIRV-Tools.git
+                tag: vulkan-sdk-1.4.321.0
+                dest: third_party/spirv-tools
+              - type: git
+                url: https://github.com/KhronosGroup/SPIRV-Headers.git
+                tag: vulkan-sdk-1.4.321.0
+                dest: third_party/spirv-headers
+              - type: git
+                url: https://github.com/KhronosGroup/glslang.git
+                tag: vulkan-sdk-1.4.321.0
+                dest: third_party/glslang
 
       - name: ffmpeg
         cleanup:
