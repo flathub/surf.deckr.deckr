@@ -1,6 +1,6 @@
 app-id: surf.deckr.deckr
 runtime: org.gnome.Platform
-runtime-version: "46"
+runtime-version: "48"
 sdk: org.gnome.Sdk
 command: deckr
 separate-locales: false
@@ -45,7 +45,7 @@ modules:
       - type: archive
         url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Linux.tar.gz
         # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Debug.tar.gz
-        sha256: b6ed6546d371a863eef33bb6dcfbb038ff53fcf8cc74946796238581c8cb2fd1
+        sha256: 24cf1603cdd1b9b7f48fd975478be50770451573315d47b513cae015e659f4bd
         dest: deckr
 
       - type: file
