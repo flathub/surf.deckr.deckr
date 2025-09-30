@@ -45,7 +45,7 @@ modules:
       - type: archive
         url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Linux.tar.gz
         # url: https://d3sp89svrxzy0t.cloudfront.net/dashboard/Deckr-Debug.tar.gz
-        sha256: 24cf1603cdd1b9b7f48fd975478be50770451573315d47b513cae015e659f4bd
+        sha256: 13583ff732225e1d27cfa55bc79e8da88bf7100c8e40a493460660212afb552d
         dest: deckr
 
       - type: file
