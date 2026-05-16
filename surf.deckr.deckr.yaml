@@ -1,6 +1,6 @@
 app-id: surf.deckr.deckr
 runtime: org.gnome.Platform
-runtime-version: "48"
+runtime-version: '50'
 sdk: org.gnome.Sdk
 command: deckr
 separate-locales: false
@@ -21,7 +21,10 @@ finish-args:
   - --filesystem=xdg-videos
   # Allow access to hardware video acceleration
   - --filesystem=/sys/class/drm:ro
-
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - '*.la'
 modules:
   - name: deckr
     buildsystem: simple
@@ -70,9 +73,6 @@ modules:
 
   # These are the required for media_kit
   - name: libmpv
-    cleanup:
-      - /include
-      - /lib/pkgconfig
     buildsystem: meson
     config-opts:
       - -Dlibmpv=true
@@ -84,8 +84,8 @@ modules:
       - -Dgpl=false
     sources:
       - type: archive
-        url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.40.0.tar.gz
-        sha256: 10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3
+        url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.41.0.tar.gz
+        sha256: ee21092a5ee427353392360929dc64645c54479aefdb5babc5cfbb5fad626209
         x-checker-data:
           type: anitya
           project-id: 5348
@@ -93,9 +93,6 @@ modules:
           url-template: https://github.com/mpv-player/mpv/archive/refs/tags/v$version.tar.gz
     modules:
       - name: libass
-        cleanup:
-          - /include
-          - /lib/pkgconfig
         config-opts:
           - --disable-static
         sources:
@@ -108,22 +105,6 @@ modules:
               stable-only: true
               url-template: https://github.com/libass/libass/releases/download/$version/libass-$version.tar.gz
 
-      - name: nv-codec-headers
-        cleanup:
-          - "*"
-        no-autogen: true
-        make-install-args:
-          - PREFIX=/app
-        sources:
-          - type: archive
-            url: https://github.com/FFmpeg/nv-codec-headers/archive/refs/tags/n13.0.19.0.tar.gz
-            sha256: 86d15d1a7c0ac73a0eafdfc57bebfeba7da8264595bf531cf4d8db1c22940116
-            x-checker-data:
-              type: anitya
-              project-id: 223796
-              stable-only: true
-              url-template: https://github.com/FFmpeg/nv-codec-headers/archive/refs/tags/n$version.tar.gz
-
       - name: libplacebo
         buildsystem: meson
         config-opts:
@@ -132,71 +113,9 @@ modules:
           - -Dglslang=disabled
           - -Dd3d11=disabled
           - -Ddemos=false
-
-        cleanup:
-          - /include
-          - /lib/pkgconfig
         sources:
           - type: git
             url: https://github.com/haasn/libplacebo.git
-            tag: v7.351.0
-        modules:
-          - name: shaderc
-            buildsystem: cmake-ninja
-            builddir: true
-            config-opts:
-              - -DSHADERC_SKIP_COPYRIGHT_CHECK=ON
-              - -DSHADERC_SKIP_EXAMPLES=ON
-              - -DSHADERC_SKIP_TESTS=ON
-              - -DSPIRV_SKIP_EXECUTABLES=ON
-              - -DENABLE_GLSLANG_BINARIES=OFF
-            cleanup:
-              - /bin
-              - /include
-              - /lib/cmake
-              - "*.a"
-              - /lib/pkgconfig
-            sources:
-              - type: git
-                url: https://github.com/google/shaderc.git
-                tag: v2025.3
-              - type: git
-                url: https://github.com/KhronosGroup/SPIRV-Tools.git
-                tag: vulkan-sdk-1.4.321.0
-                dest: third_party/spirv-tools
-              - type: git
-                url: https://github.com/KhronosGroup/SPIRV-Headers.git
-                tag: vulkan-sdk-1.4.321.0
-                dest: third_party/spirv-headers
-              - type: git
-                url: https://github.com/KhronosGroup/glslang.git
-                tag: vulkan-sdk-1.4.321.0
-                dest: third_party/glslang
+            tag: v7.360.1
+            commit: cee9b076f2c63104ccfd497fa79c39a867293ec4
 
-      - name: ffmpeg
-        cleanup:
-          - /include
-          - /lib/pkgconfig
-          - /share/ffmpeg/examples
-        config-opts:
-          - --enable-shared
-          - --enable-gnutls
-          - --enable-libmp3lame
-          - --enable-libopus
-          - --enable-libvorbis
-          - --disable-static
-          - --disable-debug
-          - --disable-doc
-          - --disable-programs
-          - --disable-encoders
-          - --disable-muxers
-          - --enable-protocol=https
-          - --enable-protocol=tls
-        sources:
-          - type: git
-            url: https://github.com/FFmpeg/FFmpeg.git
-            commit: db69d06eeeab4f46da15030a80d539efb4503ca8
-            tag: n7.1.1
-            x-checker-data:
-              type: git
-              tag-pattern: ^n([\d.]{3,7})$
